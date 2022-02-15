@@ -6,9 +6,7 @@ export class TgProxyService {
 
   constructor(token: string) {
     this.axios = axios.create({
-      headers: {
-        "Content-Type": "application/json",
-      },
+      headers: { "Content-Type": "application/json" },
     });
     this.baseUrl = "https://api.telegram.org/bot" + token;
   }

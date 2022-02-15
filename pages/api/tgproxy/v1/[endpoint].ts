@@ -11,7 +11,7 @@ import { HttpException } from "@lib/error";
 
 type SeqCtx = {
   jwt?: any;
-  claims?: { botId: string };
+  claims?: { botId: string; chatId: string };
   telegram?: TelegramService;
   tgproxy?: TgProxyService;
 };
@@ -45,11 +45,18 @@ async function validate(input: SeqHandlerInput<SeqCtx>) {
 
 async function handle(input: SeqHandlerInput<SeqCtx>) {
   const { req, res, ctx } = input;
-  const { tgproxy } = ctx;
+  const { tgproxy, claims } = ctx;
   assert(tgproxy);
+  assert(claims);
   const endpoint = req.query?.endpoint;
-  await tgproxy.proxy(endpoint as string, req.body);
-  res.json({ ok: 1 });
+
+  const reqBody: Record<string, any> = req.body ? { ...req.body } : {};
+  // inject chat_id
+  if (endpoint === "sendMessage" || endpoint === "sendPhoto") {
+    if (!reqBody.chat_id) reqBody.chat_id = claims.chatId;
+  }
+  const data = await tgproxy.proxy(endpoint as string, reqBody);
+  res.json(data);
   return true;
 }
 

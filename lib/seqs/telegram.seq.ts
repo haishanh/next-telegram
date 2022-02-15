@@ -38,9 +38,16 @@ export async function webhook(input: SeqHandlerInput<SeqCtx>) {
       });
       break;
     default:
+      const candy =
+        botId === "jizha" ? "\u53fd\u53fd\u55b3\u55b3\u624e\u624e\u4f60\u9e21\u9e21" : "🍬🍬🍬";
       await telegram.sendMessage({
         chat_id: chat.id,
-        text: "😢\n\nHey, I don't konw what to do with this command\n\nPlease send me something that I know\n\n🍬🍬🍬",
+        text: [
+          "😢",
+          "Hey, I don't know what to do with this command",
+          "Please send me something that I know",
+          candy,
+        ].join("\n\n"),
         reply_markup: {
           resize_keyboard: true,
           keyboard: [[{ text: "/token" }]],
