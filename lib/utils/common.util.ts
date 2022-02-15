@@ -15,19 +15,17 @@ type SeqHandler<Ctx extends any> = (input: SeqHandlerInput<Ctx>) => MaybePromise
 export function seq<Ctx>(...fns: SeqHandler<Ctx>[]) {
   return async (input: SeqHandlerInput<Ctx>) => {
     for (let fn of fns) {
-      let isHandled: boolean | void;
       try {
-        isHandled = await fn(input);
+        const isHandled = await fn(input);
+        if (isHandled) return;
       } catch (e) {
         if (e instanceof HttpException) {
-          const { res } = input;
-          res.status(e.statusCode).json({ message: e.message, code: e.code });
-          break;
+          input.res.status(e.statusCode).json({ message: e.message, code: e.code });
+          return;
         } else {
           throw e;
         }
       }
-      if (isHandled) break;
     }
   };
 }

@@ -9,7 +9,12 @@ import { TgProxyService } from "@lib/services/tgproxy.service";
 import assert from "assert";
 import { HttpException } from "@lib/error";
 
-type SeqCtx = { jwt?: any; telegram?: TelegramService; tgproxy?: TgProxyService };
+type SeqCtx = {
+  jwt?: any;
+  claims?: { botId: string };
+  telegram?: TelegramService;
+  tgproxy?: TgProxyService;
+};
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   const deal = seq<SeqCtx>(jwt.setup, validate, tgproxy.setup, handle);
@@ -32,7 +37,7 @@ async function validate(input: SeqHandlerInput<SeqCtx>) {
   }
   const { jwt } = ctx;
   try {
-    await jwt.verify(capture[1]);
+    input.ctx.claims = await jwt.verify(capture[1]);
   } catch (e) {
     return unauthorized();
   }

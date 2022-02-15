@@ -2,6 +2,7 @@ import jwt from "jsonwebtoken";
 import { config } from "@lib/config";
 import { SeqHandlerInput } from "@lib/utils/common.util";
 import util from "util";
+import assert from "assert";
 
 const sign = util.promisify(jwt.sign);
 
@@ -11,6 +12,9 @@ interface Jwt {
 }
 
 export function setup(input: SeqHandlerInput<{ jwt?: Jwt }>) {
+  // should haven't initialized
+  assert(!input.ctx.jwt);
+
   input.ctx.jwt = {
     sign: (d: string | object | Buffer) => sign(d, config.jwtSecret),
     verify: (d: string) => {

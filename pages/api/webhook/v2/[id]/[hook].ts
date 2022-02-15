@@ -1,27 +1,17 @@
 import type { NextApiRequest, NextApiResponse } from "next";
-
+import { HttpException } from "@lib/error";
 import * as config from "@lib/config";
 import { seq } from "@lib/utils/common.util";
+import type { SeqHandlerInput } from "@lib/utils/common.util";
 import * as jwt from "@lib/seqs/jwt.seq";
 import * as telegram from "@lib/seqs/telegram.seq";
-import type { SeqHandlerInput } from "@lib/utils/common.util";
-import { HttpException } from "@lib/error";
-// import { TelegramService } from "@lib/services/telegram.service";
-// import assert from "assert";
-
-type Chat = {
-  id: number;
-  first_name: string;
-  username: string;
-  // private, ...
-  type: string;
-};
 
 function validate(input: SeqHandlerInput<{ botId?: string }>) {
   const { req } = input;
 
   // botId
-  const botId = (req.query?.id as string) || "0";
+  const botId = req.query?.id;
+  if (typeof botId !== "string") throw new HttpException(400, "Parameters Error");
   // hookId
   const hookId = req.query?.hook;
   if (typeof hookId !== "string") throw new HttpException(400, "Parameters Error");
