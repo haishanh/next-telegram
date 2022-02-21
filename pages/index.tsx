@@ -9,7 +9,7 @@ const x = (base: string) =>
   base +
   '/api/tgproxy/v1/sendMessage" \\' +
   "\n  " +
-  '-H "Authorization:Bearer ${jwt}" \\' +
+  '-H "Authorization: Bearer ${token}" \\' +
   "\n  " +
   '-H "Content-Type: application/json" \\' +
   "\n  " +
