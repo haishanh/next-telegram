@@ -11,10 +11,16 @@ function validate(input: SeqHandlerInput<{ botId?: string }>) {
 
   // botId
   const botId = req.query?.id;
-  if (typeof botId !== "string") throw new HttpException(400, "Parameters Error");
+  if (typeof botId !== "string") {
+    console.log("missing botId");
+    throw new HttpException(400, "Parameters Error");
+  }
   // hookId
   const hookId = req.query?.hook;
-  if (typeof hookId !== "string") throw new HttpException(400, "Parameters Error");
+  if (typeof hookId !== "string") {
+    console.log("missing hookId");
+    throw new HttpException(400, "Parameters Error");
+  }
 
   const expected = config.get(["WEBHOOK_ID", botId]);
   if (hookId !== expected) throw new HttpException(400, "Parameters Error");
