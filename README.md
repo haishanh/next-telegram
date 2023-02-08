@@ -1,7 +1,7 @@
 ## Development
 
 ```bash
-yarn dev
+pnpm dev
 ```
 
 ## Add a new bot
