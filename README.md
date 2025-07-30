@@ -6,7 +6,7 @@ pnpm dev
 
 ## Add a new bot
 
-Assumed you've created a bot with the @BotFather bot, you should now have the API token for your newly created bot.
+Assuming you've created a bot with the @BotFather bot, you should now have the API token for your newly created bot.
 
 1. Add env `BOT_TOKEN_{botId}` and `WEBHOOK_ID_{botId}` to your environment variables settings. `botId` is simply a string to identify a bot in this service since it supports multi bots. You can use whatever you want or you may just use the username of your bot as`botId`. The BOT_TOKEN is the API token of your bot. And for the WEBHOOK_ID one, you should just pick a random (url friendly) string. It will be part of the bot webhook url which we will config to telegram laster.
 
