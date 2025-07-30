@@ -15,6 +15,7 @@ export class TgProxyService {
   async proxy(endpoint: string, payload: unknown) {
     const { baseUrl } = this;
     const url = `${baseUrl}/${endpoint}`;
+    console.log({ url, payload });
     try {
       const res = await this.axios.post(url, payload);
       return res.data;

@@ -1,11 +1,13 @@
-import { TelegramService } from "@lib/services/telegram.service";
-import * as config from "@lib/config";
-import type { SeqHandlerInput } from "@lib/utils/common.util";
+import { TelegramService } from "@/lib/services/telegram.service";
+import * as config from "@/lib/config";
+import type { SeqHandlerInput } from "@/lib/utils/common.util";
 import assert from "assert";
 
 type SeqCtx = { jwt?: any; botId?: string; telegram?: TelegramService };
 
-export function setup(input: SeqHandlerInput<{ telegram?: TelegramService; botId?: string }>) {
+export function setup(
+  input: SeqHandlerInput<{ telegram?: TelegramService; botId?: string }>,
+) {
   const botId = input.ctx.botId || "0";
   const botToken = config.get(["BOT_TOKEN", botId]);
   assert(botToken, ["BOT_TOKEN", botId, "not configed"].join(" "));
@@ -18,7 +20,7 @@ export async function webhook(input: SeqHandlerInput<SeqCtx>) {
   assert(telegram);
   const botId = input.ctx.botId || "0";
 
-  const { body } = input.req;
+  const body = await input.req.json();
   const { chat, text } = body.message;
 
   console.log(`message.text=${text}`);
@@ -39,7 +41,9 @@ export async function webhook(input: SeqHandlerInput<SeqCtx>) {
       break;
     default:
       const candy =
-        botId === "jizha" ? "\u53fd\u53fd\u55b3\u55b3\u624e\u624e\u4f60\u9e21\u9e21" : "🍬🍬🍬";
+        botId === "jizha"
+          ? "\u53fd\u53fd\u55b3\u55b3\u624e\u624e\u4f60\u9e21\u9e21"
+          : "🍬🍬🍬";
       await telegram.sendMessage({
         chat_id: chat.id,
         text: [

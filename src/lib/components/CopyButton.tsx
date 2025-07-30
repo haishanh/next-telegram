@@ -1,8 +1,10 @@
+"use client";
+
 import { VisuallyHidden } from "@reach/visually-hidden";
 import * as React from "react";
 import { Check, Clipboard } from "react-feather";
 
-import { IconButton } from "@lib/components/IconButton";
+import { IconButton } from "@/lib/components/IconButton";
 
 const { useCallback, useState } = React;
 
@@ -27,7 +29,7 @@ export function CopyButton({ provideContent }: CopyButtonProps) {
 
       setTimeout(() => setIsCopying(false), 3000);
     },
-    [provideContent, isCopying]
+    [provideContent, isCopying],
   );
 
   return (

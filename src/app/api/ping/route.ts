@@ -1,7 +1,7 @@
-import type { NextApiRequest, NextApiResponse } from "next";
+import { type NextRequest } from "next/server";
 import { arch, cpus, release, platform, type, totalmem } from "os";
 
-export default async function handler(req: NextApiRequest, res: NextApiResponse) {
+export async function GET(request: NextRequest) {
   const info = {
     arch: arch(),
     cpus: cpus(),
@@ -10,5 +10,5 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     type: type(),
     totalmem: totalmem(),
   };
-  return res.json(info);
+  return Response.json(info);
 }

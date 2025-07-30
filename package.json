@@ -1,34 +1,38 @@
 {
   "name": "next-telegram",
   "version": "0.1.0",
-  "prettier": {
-    "printWidth": 100
+  "packageManager": "pnpm@10.13.1",
+  "engines": {
+    "node": ">=22",
+    "pnpm": ">=10.13.1"
   },
   "private": true,
   "scripts": {
-    "dev": "next dev",
+    "dev": "next dev --turbopack",
     "build": "next build",
     "start": "next start",
     "lint": "next lint"
   },
   "dependencies": {
     "@reach/visually-hidden": "0.18.0",
-    "axios": "1.3.2",
-    "copy-text-to-clipboard": "3.0.1",
-    "jose": "4.11.4",
-    "next": "13.1.6",
-    "react": "18.2.0",
-    "react-dom": "18.2.0",
+    "axios": "1.11.0",
+    "copy-text-to-clipboard": "3.2.0",
+    "jose": "6.0.12",
+    "next": "15.4.5",
+    "react": "19.1.1",
+    "react-dom": "19.1.1",
     "react-feather": "2.0.10"
   },
   "devDependencies": {
-    "@types/node": "18.13.0",
-    "@types/react": "18.0.27",
-    "eslint": "8.33.0",
-    "eslint-config-next": "13.1.6",
-    "eslint-plugin-simple-import-sort": "10.0.0",
-    "prettier": "2.8.4",
-    "sass": "1.58.0",
-    "typescript": "4.9.5"
+    "@eslint/eslintrc": "3.3.1",
+    "@tailwindcss/postcss": "4.1.11",
+    "@trivago/prettier-plugin-sort-imports": "5.2.2",
+    "@types/node": "24.1.0",
+    "@types/react": "19.1.9",
+    "eslint": "9.32.0",
+    "eslint-config-next": "15.4.5",
+    "prettier": "3.6.2",
+    "prettier-plugin-tailwindcss": "0.6.14",
+    "typescript": "5.8.3"
   }
 }
