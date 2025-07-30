@@ -7,13 +7,13 @@ export type SeqHandlerInput<Ctx = unknown> = {
   ctx: Ctx;
 };
 
-type SeqHandler<Ctx extends any> = (
+type SeqHandler<Ctx> = (
   input: SeqHandlerInput<Ctx>,
 ) => MaybePromise<Response | void>;
 
 export function seq<Ctx>(...fns: SeqHandler<Ctx>[]) {
   return async (input: SeqHandlerInput<Ctx>) => {
-    for (let fn of fns) {
+    for (const fn of fns) {
       try {
         const res = await fn(input);
         if (res instanceof Response) return res;
