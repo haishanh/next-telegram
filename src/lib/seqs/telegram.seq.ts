@@ -5,6 +5,8 @@ import assert from "assert";
 
 type SeqCtx = { jwt?: any; botId?: string; telegram?: TelegramService };
 
+const BACKSLASH = "\\";
+
 export function setup(
   input: SeqHandlerInput<{ telegram?: TelegramService; botId?: string }>,
 ) {
@@ -42,9 +44,9 @@ export async function webhook(input: SeqHandlerInput<SeqCtx>) {
           "To send a message, try",
           "",
           "```bash",
-          `curl "https://jizha.vercel.app/api/tgproxy/v1/sendMessage" \\`,
-          `  -H "Authorization: Bearer ${token}" \\`,
-          `  -H "Content-Type: application/json" \\`,
+          `curl "https://jizha.vercel.app/api/tgproxy/v1/sendMessage" ${BACKSLASH}`,
+          `  -H "Authorization: Bearer ${token}" ${BACKSLASH}`,
+          `  -H "Content-Type: application/json" ${BACKSLASH}`,
           `  -d '{"text": "hello"}'`,
           "```",
         ].join("\n"),
