@@ -36,7 +36,20 @@ export async function webhook(input: SeqHandlerInput<SeqCtx>) {
       });
       await telegram.sendMessage({
         chat_id: chat.id,
-        text: "The above string is your notification token",
+        text: [
+          "The above string is your notification token",
+          "",
+          "To send a message, try",
+          "",
+          "```bash",
+          `curl "https://jizha.vercel.app/api/tgproxy/v1/sendMessage" \\`,
+          `  -H "Authorization: Bearer ${token}" \\`,
+          `  -H "Content-Type: application/json" \\`,
+          `  -d '{"text": "hello"}'`,
+          "```",
+          "",
+        ].join("\n"),
+        parse_mode: "MarkdownV2",
       });
       break;
     default:
