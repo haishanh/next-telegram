@@ -47,7 +47,6 @@ export async function webhook(input: SeqHandlerInput<SeqCtx>) {
           `  -H "Content-Type: application/json" \\`,
           `  -d '{"text": "hello"}'`,
           "```",
-          "",
         ].join("\n"),
         parse_mode: "MarkdownV2",
       });
