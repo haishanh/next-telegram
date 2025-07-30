@@ -50,6 +50,20 @@ export default async function Page() {
         </ExternalLink>
         .
       </p>
+
+      <footer className={styles.footer}>
+        <p>
+          By{" "}
+          <a
+            href="https://haishan.me"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            haishan
+          </a>{" "}
+          in Shanghai
+        </p>
+      </footer>
     </div>
   );
 }

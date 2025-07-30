@@ -2,7 +2,7 @@
 
 import { VisuallyHidden } from "@reach/visually-hidden";
 import * as React from "react";
-import { Check, Clipboard } from "react-feather";
+import { CopyIcon, CheckIcon } from "@phosphor-icons/react";
 
 import { IconButton } from "@/lib/components/IconButton";
 
@@ -34,7 +34,7 @@ export function CopyButton({ provideContent }: CopyButtonProps) {
 
   return (
     <IconButton onClick={onClick}>
-      {isCopying ? <Check size={16} /> : <Clipboard size={16} />}
+      {isCopying ? <CheckIcon size={16} /> : <CopyIcon size={16} />}
       <VisuallyHidden>Copy</VisuallyHidden>
     </IconButton>
   );
